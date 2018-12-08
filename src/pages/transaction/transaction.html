@@ -1,0 +1,94 @@
+<ion-header>
+    <ion-navbar>
+      <ion-title>New Transaction</ion-title>
+      <ion-buttons end>
+          <button ion-button icon-only color="royal" [disabled]="validations_form.invalid" (click)="newTransaction()">
+            <ion-icon name="checkmark-circle-outline"></ion-icon>
+          </button>
+      </ion-buttons>
+    </ion-navbar>
+  </ion-header>
+    
+    
+  <ion-content padding>
+    <div padding>
+      <ion-segment [(ngModel)]="type">
+        <ion-segment-button value="expense">
+          Expense
+        </ion-segment-button>
+        <ion-segment-button value="income">
+          Income
+        </ion-segment-button>
+      </ion-segment>
+    </div>
+
+    <ion-list>
+    
+    <div [ngSwitch]="type" >
+       <ion-list *ngSwitchCase="'expense'">
+        <ion-label>Category</ion-label>
+        <ion-icon name="list" item-start></ion-icon>
+        <ion-list [(ngModel)]="category" radio-group>
+          <ion-item *ngFor="let item of expenseCategory">
+              <ion-icon [name]="item.icon" item-start></ion-icon>
+              <ion-label>{{item.name}}</ion-label>
+              <ion-radio [value]="item.name"></ion-radio>
+          </ion-item>
+        </ion-list>
+      </ion-list>
+
+          <ion-list *ngSwitchCase="'income'">
+            <ion-label>Category</ion-label>
+              <ion-icon name="list" item-start></ion-icon>
+              <ion-list [(ngModel)]="category" radio-group>
+                <ion-item *ngFor="let item of incomeCategory">
+                  <ion-icon [name]="item.icon" item-start></ion-icon>
+                  <ion-label>{{item.name}}</ion-label>
+                  <ion-radio [value]="item.name"></ion-radio>
+              </ion-item>
+              </ion-list>
+          </ion-list>
+      </div>
+  
+    <form [formGroup]="validations_form">
+      <ion-label>Amount</ion-label>
+        <ion-item>
+          <ion-icon name="logo-usd" item-start></ion-icon>
+            <ion-input formControlName="amount" placeholder = "Enter amount" type="number"></ion-input>
+         </ion-item>
+         <ng-container *ngFor="let validation of validation_messages.amount">
+            <div *ngIf= "validations_form.get('amount').hasError(validation.type) && (validations_form.get('amount').dirty || validations_form.get('amount').touched)">
+             {{validation.message}}
+           </div>
+        </ng-container>
+  
+
+      <ion-label>Date</ion-label>
+        <ion-item>
+          <ion-icon name="time" item-start></ion-icon>
+          {{date}}
+        <button ion-button (click)="openCalendar()" item-end>Choose</button>
+        </ion-item>
+
+      <ion-label>Description</ion-label>
+         <ion-item>
+          <ion-icon name="book" item-start></ion-icon>
+          <ion-input formControlName="description" placeholder = "Enter description" type ="text" ion-text></ion-input>
+         </ion-item>
+         <ng-container *ngFor="let validation of validation_messages.description">
+            <div *ngIf= "validations_form.get('description').hasError(validation.type) && (validations_form.get('description').dirty || validations_form.get('description').touched)">
+             {{validation.message}}
+           </div>
+        </ng-container>
+  </form>
+
+  <ion-label>Location</ion-label>
+  <ion-item>
+    <ion-icon name="pin" item-start></ion-icon>
+    {{lat}} , {{long}}
+    <button ion-button (click) = "viewMap()" item-end>View Map</button>
+  </ion-item>
+</ion-list>
+  </ion-content>
+    
+  

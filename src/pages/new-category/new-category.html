@@ -1,0 +1,32 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>New Category</ion-title>
+  <ion-buttons end>
+      <button ion-button icon-only color="royal" (click)="newCategory()">
+        <ion-icon name="checkmark-circle-outline"></ion-icon>
+      </button>
+  </ion-buttons>
+</ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+  <ion-label>Name</ion-label>
+  <form [formGroup]="validations_form">
+    <ion-item>
+     <ion-input formControlName="name" placeholder = "Enter category name" type ="text" ion-text></ion-input>
+    </ion-item>
+
+    <ng-container *ngFor="let validation of validation_messages.name">
+        <div *ngIf= "validations_form.get('name').hasError(validation.type) && (validations_form.get('name').dirty || validations_form.get('name').touched)">
+         {{validation.message}}
+       </div>
+    </ng-container>
+  </form>
+
+    <ion-item>
+        <ion-label>Expense / Income</ion-label>
+        <ion-toggle [(ngModel)]="type"></ion-toggle>
+    </ion-item>
+</ion-content>

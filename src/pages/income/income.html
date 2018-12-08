@@ -1,0 +1,23 @@
+<ion-header>
+    <ion-toolbar>
+      <ion-title>Income</ion-title>
+      <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+    </ion-toolbar>
+  </ion-header>
+  
+  
+  <ion-content>
+    <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
+    <ion-list>
+      <ion-item-group *ngFor="let group of groupedList">
+        <ion-item-divider sticky light>{{group.date}}</ion-item-divider>
+        <ion-item *ngFor="let value of group.valueList">
+          <ion-icon [name]="value.icon" item-start></ion-icon>
+          {{value.description}}
+          <ion-badge item-end color="secondary">$ {{value.amount}}</ion-badge>
+        </ion-item>
+      </ion-item-group>
+    </ion-list>
+  </ion-content>

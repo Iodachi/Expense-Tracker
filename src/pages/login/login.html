@@ -1,0 +1,33 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Login</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-list>
+<ion-item>
+  <ion-label floating>Email Address</ion-label>
+  <ion-input type="text" [(ngModel)] = "email"></ion-input>
+</ion-item>
+
+<ion-item>
+    <ion-label floating>Password</ion-label>
+    <ion-input type="password" [(ngModel)] = "password"></ion-input>
+</ion-item>
+
+<button ion-button full (click) ="login()">LOGIN</button>
+<button ion-button color = "facebook" full (click) = "facebook()">
+    <ion-icon name= "logo-facebook"></ion-icon> 
+      | LOGIN WITH FACEBOOK
+</button>
+<button ion-button color = "google" full (click) = "google()">
+    <ion-icon name= "logo-google">  </ion-icon> 
+      | LOGIN WITH GOOGLE
+</button>
+<button ion-button full color ="light" (click) ="register()">REGISTER</button>
+</ion-list>
+</ion-content>

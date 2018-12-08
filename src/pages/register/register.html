@@ -1,0 +1,36 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>register</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-list>
+      <form [formGroup]="validations_form">
+    <ion-item>
+        <ion-label floating>Email Address</ion-label>
+        <ion-input type="text" formControlName="email"></ion-input>
+      </ion-item>
+      <ng-container *ngFor="let validation of validation_messages.email">
+          <div *ngIf= "validations_form.get('email').hasError(validation.type) && (validations_form.get('email').dirty || validations_form.get('email').touched)">
+           {{validation.message}}
+         </div>
+      </ng-container>
+      
+      <ion-item>
+          <ion-label floating>Password</ion-label>
+          <ion-input type="password" formControlName="password"></ion-input>
+      </ion-item>
+      <ng-container *ngFor="let validation of validation_messages.password">
+          <div *ngIf= "validations_form.get('password').hasError(validation.type) && (validations_form.get('password').dirty || validations_form.get('password').touched)">
+           {{validation.message}}
+         </div>
+      </ng-container>
+
+      <button ion-button full [disabled]="validations_form.invalid" (click)="register()">Register</button>
+    </form>
+  </ion-list>
+</ion-content>
